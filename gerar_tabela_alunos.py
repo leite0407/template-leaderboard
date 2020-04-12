@@ -1,3 +1,6 @@
+'''
+Script para criar tabela alunos na db, antes de se pôr o server a correr.
+'''
 import pandas as pd
 from sqlalchemy import create_engine
 

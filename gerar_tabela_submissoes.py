@@ -1,7 +1,8 @@
 '''
-Gerar tabela com submissões até à data.
+Script para criar tabela submissões, antes de se pôr o server a correr.
 
-NÃO VOLTAR A CORRER ISTO SEM MUDAR CODIGO DAS OUTRAS TAREFAS!!!!
+Atenção que este script não lida com os checkpoints e projetos, pelo que tem de se ir à spreadsheet destes (https://docs.google.com/spreadsheets/d/1xIZDZ-9gFkajvn8MkNWQyT0mi70xmpoaTlj4YvYTj3k/edit#gid=00)
+e trocar todos os valores que estão a 1 para 0 e depois novamente para 1.
 
 '''
 
@@ -56,6 +57,7 @@ db.init_app(app)
 with app.app_context():
 
     # Dropar tabela das submissoes e criar nova
+
     Submissao.__table__.drop(db.engine)
     Submissao.__table__.create(db.session.bind)
 

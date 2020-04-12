@@ -1,3 +1,10 @@
+'''
+Script usado para criar tabela tarefas na db antes de se colocar o server a correr.
+
+Para registar novos exercícios do repl.it basta correr este script.
+
+
+'''
 import requests as rq
 import json
 import csv
