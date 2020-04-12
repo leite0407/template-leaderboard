@@ -1,0 +1,51 @@
+Exemplos do que vem nos requests de cada sitio
+
+REPLIT
+{
+    'assignment': {
+        'id': 5074800,
+        'name': 'Aula 1 - Ex 4',
+        'type': 'input_output'
+        },
+    'classroom': {
+        'id': 184710,
+        'name': 'afterschool de Informática I',
+        'webhook_secret':
+        '6e975f31-169f-4ed3-a456-607bb3c81d1d'
+        },
+    'submission': {
+        'id': 11893825,
+        'status': 'submitted_incomplete',
+        'time_submitted': '2020-04-11T18:39:41.336Z',
+        'time_created': '2020-04-06T01:42:08.642Z',
+        'teacher_url': 'https://repl.it/teacher/submissions/11893825',
+        'student_url': 'https://repl.it/student/submissions/11893825',
+        'files': [
+            {
+                'name': 'main.py',
+                'content': ''}
+                ]
+        },
+    'student': {
+        'id': 3112973,
+        'first_name': 'aluno',
+        'last_name': 'teste',
+        'email': 'aluno.teste.t2@gmail.com'
+        },
+    'event_name': 'student_submits_assignment'
+}
+
+QUIZ
+{
+    'id': 'quiz2',
+    'email': 'mlff@gmail.com',
+    'timestamp': '11/04/2020 20:51:34'
+}
+
+OUTRAS_TAREFAS
+{
+    'assignment_id': 'proj1',
+    'student_id': '3150115',
+    'value' : '1'
+}
+
