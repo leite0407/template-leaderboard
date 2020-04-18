@@ -18,7 +18,7 @@ from utils import rplt_time_to_datetime, quiz_time_to_datetime
 link_submissoes = "https://repl.it/data/teacher/classrooms/184710/submissions"
 
 # Cookie com o id da sessão iniciada no rep.it para passar nos requests
-cookie = {'connect.sid' : 's%3ASUMBXm17E4SrTeeioWZrTfBtszFRgslZ.J4V8v5z5jQX9BE3qyaM%2BRmMh%2FhkB1gmbvE7LPbVJERc'}
+cookie = {'connect.sid' : 's%3A2fdg2xLpIB7uZAqyqmcS_uEe534hcjxT.I6bR%2BOAdtl1ZRyKf5tJlAPTOyiQLeIhCcaMOqLe92LQ'}
 
 # Enviar request, processar json recebido. (json vem como dict de listas por assignment, converter em lista)
 dict_submissoes = json.loads(rq.get(link_submissoes, cookies=cookie).content)
