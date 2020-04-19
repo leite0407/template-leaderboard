@@ -40,4 +40,6 @@ with app.app_context():
         )
         db.session.add(aluno)
 
+    print(Aluno.query.all())
+
     db.session.commit()

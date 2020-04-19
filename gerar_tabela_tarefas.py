@@ -45,7 +45,6 @@ for i in range(1,8):
     assignments_df = assignments_df.append(pd.DataFrame([[30 + i, 'proj'+str(i), 'projeto', i, 'ouro']] , columns=labels))
 
 
-print(assignments_df)
 
 # Armazenar df na base de dados
 
@@ -75,5 +74,6 @@ with app.app_context():
         )
         db.session.add(tarefa)
 
-    db.session.commit()
+    print(Tarefa.query.all())
 
+    db.session.commit()

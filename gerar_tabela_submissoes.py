@@ -6,7 +6,7 @@ e trocar todos os valores que estão a 1 para 0 e depois novamente para 1.
 
 '''
 
-quiz_count = 2 # MUDAR PARA O NUMERO DE QUIZZES QUE JÁ TIVEREM SIDO PUBLICADOS
+quiz_count = 3 # MUDAR PARA O NUMERO DE QUIZZES QUE JÁ TIVEREM SIDO PUBLICADOS
 
 
 import requests as rq
@@ -123,5 +123,7 @@ with app.app_context():
         aluno.bronze = nivel_count['bronze']
         aluno.prata = nivel_count['prata']
         aluno.ouro = nivel_count['ouro']
+
+    print(Submissao.query.all())
 
     db.session.commit()

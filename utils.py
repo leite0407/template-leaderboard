@@ -4,7 +4,16 @@ from datetime import datetime
 def rplt_time_to_datetime(time):
     ''' Transforma string do timestamp do repl.it e transforma em datetime '''
 
-    return datetime.fromisoformat(time.split('.')[0])
+    # 2020-04-11T18:39:41.336Z
+
+    return datetime(
+        int(time.split('-')[0]),   # ano
+        int(time.split('-')[1]),                 # mês
+        int(time.split('-')[2].split('T')[0]),                 # dia
+        int(time.split('T')[1].split(':')[0]),   # hora
+        int(time.split('T')[1].split(':')[1]),   # minuto
+        int(time.split('T')[1].split(':')[2].split('.')[0]),   # segundo
+    )
 
 def quiz_time_to_datetime(time):
     ''' Transforma string do timestamp do quiz em datetime '''
