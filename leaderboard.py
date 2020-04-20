@@ -25,9 +25,6 @@ def index():
     for aluno in Aluno.query.order_by(Aluno.nome).all():
         leaderboard += [aluno.__dict__]
 
-    alunos = Aluno.query.all()
-    print(alunos) 
-
     return render_template('leaderboard.html', leaderboard=leaderboard)
 
 
