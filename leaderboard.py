@@ -18,11 +18,9 @@ db.init_app(app)
 
 @app.route('/debug')
 def debug():
-    
-    aluno = Aluno.query.filter_by(id='3157113').first()
-    tarefa = Tarefa.query.filter_by(id='quiz1')
 
-    return 'Hello, World!'
+    submissoes = Submissao.query.all()
+    return str(len(submissoes))
 
 @app.route('/')
 def index():
@@ -188,33 +186,6 @@ def other_assignments():
     db.session.commit()
 
     return '200'
-
-@app.route('/csv_submissoes', methods=['GET'])
-def csv_submissoes():
-
-    submissoes_df = pd.read_sql_table('submissao', db.engine)
-
-    submissoes_df.to_csv('submissoes.csv')
-
-    return send_file('submissoes.csv')
-
-@app.route('/csv_alunos', methods=['GET'])
-def csv_alunos():
-
-    submissoes_df = pd.read_sql_table('aluno', db.engine)
-
-    submissoes_df.to_csv('aluno.csv')
-
-    return send_file('aluno.csv')
-
-@app.route('/csv_tarefas', methods=['GET'])
-def csv_tarefas():
-
-    submissoes_df = pd.read_sql_table('tarefa', db.engine)
-
-    submissoes_df.to_csv('tarefa.csv')
-
-    return send_file('tarefa.csv')
 
 
 if __name__ == '__main__':
