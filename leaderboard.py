@@ -17,8 +17,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 @app.route('/debug')
+def debug():
     
-    aluno = Aluno.query.filter_by(id='')
+    aluno = Aluno.query.filter_by(id='3157113').first()
+    tarefa = Tarefa.query.filter_by(id='quiz1')
 
     return 'Hello, World!'
 
@@ -38,8 +40,8 @@ def replit():
 
     recebido = request.json
 
-    tarefa=Tarefa.query.filter_by(id=recebido['assignment']['id']).first(),
-    aluno=Aluno.query.filter_by(id=recebido['student']['id']).first(),
+    tarefa=Tarefa.query.filter_by(id=recebido['assignment']['id']).first()
+    aluno=Aluno.query.filter_by(id=recebido['student']['id']).first()
 
     # Verificar se já há submissão deste aluno para esta tarefa
     submissao = Submissao.query.filter_by(aluno=aluno, tarefa=tarefa).first()
