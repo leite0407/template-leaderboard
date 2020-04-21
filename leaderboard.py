@@ -1,9 +1,10 @@
-from flask import Flask, request, render_template
+#
+from flask import Flask, request, render_template, send_file
 from tabelas_db import db, Tarefa, Submissao, Aluno
 
 from utils import rplt_time_to_datetime, quiz_time_to_datetime
 
-import logging
+import pandas as pd
 from datetime import datetime
 
 
@@ -123,6 +124,7 @@ def quiz():
 
     return '200'
 
+
 @app.route('/outras_tarefas', methods=['POST'])
 def other_assignments():
 
@@ -180,6 +182,34 @@ def other_assignments():
     db.session.commit()
 
     return '200'
+
+@app.route('/csv_submissoes', methods=['GET'])
+def csv_submissoes():
+
+    submissoes_df = pd.read_sql_table('submissao', db.engine)
+
+    submissoes_df.to_csv('submissoes.csv')
+
+    return send_file('submissoes.csv')
+
+@app.route('/csv_alunos', methods=['GET'])
+def csv_submissoes():
+
+    submissoes_df = pd.read_sql_table('aluno', db.engine)
+
+    submissoes_df.to_csv('aluno.csv')
+
+    return send_file('aluno.csv')
+
+@app.route('/csv_tarefas', methods=['GET'])
+def csv_submissoes():
+
+    submissoes_df = pd.read_sql_table('tarefa', db.engine)
+
+    submissoes_df.to_csv('tarefa.csv')
+
+    return send_file('tarefa.csv')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
