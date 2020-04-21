@@ -16,7 +16,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Iniciar base de dados
 db.init_app(app)
 
+@app.route('/debug')
+    
+    aluno = Aluno.query.filter_by(id='')
 
+    return 'Hello, World!'
 
 @app.route('/')
 def index():
@@ -193,7 +197,7 @@ def csv_submissoes():
     return send_file('submissoes.csv')
 
 @app.route('/csv_alunos', methods=['GET'])
-def csv_submissoes():
+def csv_alunos():
 
     submissoes_df = pd.read_sql_table('aluno', db.engine)
 
@@ -202,7 +206,7 @@ def csv_submissoes():
     return send_file('aluno.csv')
 
 @app.route('/csv_tarefas', methods=['GET'])
-def csv_submissoes():
+def csv_tarefas():
 
     submissoes_df = pd.read_sql_table('tarefa', db.engine)
 
