@@ -5,7 +5,7 @@ from utils import rplt_time_to_datetime, quiz_time_to_datetime
 
 import pandas as pd
 from datetime import datetime
-
+import time
 
 # Iniciar app Flask
 app = Flask(__name__)
@@ -29,26 +29,29 @@ def leaderboard():
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
 
+    start = time.time()
+
+    alunos = Aluno.query.order_by(Aluno.nome).all()
+    tarefas = Tarefa.query.all()
+
     dashboard = {}
-
-    for aluno in Aluno.query.all():
-
+    for aluno in alunos:
         tarefas_aluno = {}
-
-        for tarefa in Tarefa.query.all():
-
-            submissao = Submissao.query.filter_by(aluno=aluno, tarefa=tarefa).first()
-
-            tarefas_aluno[tarefa.descricao] = (submissao != None)
-
+        for tarefa in tarefas:
+            tarefas_aluno[tarefa.descricao] = False
         dashboard[aluno.nome] = tarefas_aluno
+
+    for submissao in Submissao.query.all():
+        dashboard[submissao.aluno.nome][submissao.tarefa.descricao] = True
 
     semanas = []
     for i in range(1,8):
 
         semanas.append([tarefa.descricao for tarefa in Tarefa.query.filter_by(semana=i)])
 
-    alunos = [aluno.nome for aluno in Aluno.query.order_by(Aluno.nome).all()]
+    alunos = [aluno.nome for aluno in alunos]
+
+    print(time.time() - start)
 
     return render_template('dashboard.html', alunos=alunos, semanas=semanas, dashboard=dashboard)
 
