@@ -26,11 +26,31 @@ def leaderboard():
 
     return render_template('leaderboard.html', leaderboard=leaderboard)
 
-@app.route('/debug', methods=['GET'])
-def debug():
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
 
-    tarefas = Tarefa.query.all()
-    return '\n'.join(map(Tarefa.__repr__, tarefas))
+    dashboard = {}
+
+    for aluno in Aluno.query.all():
+
+        tarefas_aluno = {}
+
+        for tarefa in Tarefa.query.all():
+
+            submissao = Submissao.query.filter_by(aluno=aluno, tarefa=tarefa).first()
+
+            tarefas_aluno[tarefa.descricao] = (submissao != None)
+
+        dashboard[aluno.nome] = tarefas_aluno
+
+    semanas = []
+    for i in range(1,8):
+
+        semanas.append([tarefa.descricao for tarefa in Tarefa.query.filter_by(semana=i)])
+
+    alunos = [aluno.nome for aluno in Aluno.query.order_by(Aluno.nome).all()]
+
+    return render_template('dashboard.html', alunos=alunos, semanas=semanas, dashboard=dashboard)
 
 
 @app.route('/replit', methods=['POST'])
