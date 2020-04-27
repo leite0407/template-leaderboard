@@ -15,7 +15,7 @@ from sqlalchemy import create_engine
 link_assignments = "https://repl.it/data/classrooms/184710/assignments"
 
 # Cookie com o id da sessão iniciada no rep.it para passar nos requests
-cookie = {'connect.sid' : 's%3A2fdg2xLpIB7uZAqyqmcS_uEe534hcjxT.I6bR%2BOAdtl1ZRyKf5tJlAPTOyiQLeIhCcaMOqLe92LQ'}
+cookie = {'connect.sid' : 's%3AaaQEDIAb7_bv_8-CBILt9cfM4Dr_0Lza.Jq6WUmFnF6i%2F%2FM9m9cZsRCvpayP0MGX%2FjTo1kJihcSc'}
 
 # Enviar requests, processar json recebido
 assignments_list = json.loads(rq.get(link_assignments, cookies=cookie).content)

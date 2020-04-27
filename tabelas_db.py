@@ -23,6 +23,8 @@ class Submissao(db.Model):
     aluno = db.relationship('Aluno', backref=db.backref('submissoes', lazy=True))
     timestamp = db.Column(db.DateTime)
 
+    def __repr__(self):
+        return f'<Submissao aluno : {self.aluno.nome} | tarefa : {self.tarefa.descricao} | timestamp : {self.timestamp}>'
 
 class Aluno(db.Model):
 

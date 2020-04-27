@@ -1,4 +1,3 @@
-#
 from flask import Flask, request, render_template, send_file
 from tabelas_db import db, Tarefa, Submissao, Aluno
 
@@ -16,14 +15,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Iniciar base de dados
 db.init_app(app)
 
-@app.route('/debug')
-def debug():
 
-    submissoes = Submissao.query.all()
-    return str(len(submissoes))
-
-@app.route('/')
-def index():
+@app.route('/', methods=['GET'])
+def leaderboard():
 
     leaderboard = []
 
@@ -31,6 +25,12 @@ def index():
         leaderboard += [aluno.__dict__]
 
     return render_template('leaderboard.html', leaderboard=leaderboard)
+
+@app.route('/debug', methods=['GET'])
+def debug():
+
+    tarefas = Tarefa.query.all()
+    return '\n'.join(map(Tarefa.__repr__, tarefas))
 
 
 @app.route('/replit', methods=['POST'])
@@ -85,6 +85,7 @@ def replit():
 def quiz():
 
     recebido = request.json
+    print(recebido)
 
     aluno = Aluno.query.filter_by(mail=recebido['email']).first()
     tarefa = Tarefa.query.filter_by(descricao=recebido['id']).first()
@@ -100,7 +101,7 @@ def quiz():
     nova_submissao = Submissao(
         tarefa = tarefa,
         aluno = Aluno.query.filter_by(mail=recebido['email']).first(),
-        timestamp = quiz_time_to_datetime(recebido['Timestamp'])
+        timestamp = quiz_time_to_datetime(recebido['timestamp'])
     )
 
     db.session.add(nova_submissao)
@@ -124,7 +125,7 @@ def quiz():
     aluno.prata = nivel_count['prata']
     aluno.ouro = nivel_count['ouro']
 
-    db.commit()
+    db.session.commit()
 
     return '200'
 
