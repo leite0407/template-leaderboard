@@ -6,7 +6,7 @@ e trocar todos os valores que estão a 1 para 0 e depois novamente para 1.
 
 '''
 
-quiz_count = 3 # MUDAR PARA O NUMERO DE QUIZZES QUE JÁ TIVEREM SIDO PUBLICADOS
+quiz_count = 4 # MUDAR PARA O NUMERO DE QUIZZES QUE JÁ TIVEREM SIDO PUBLICADOS
 
 
 import requests as rq
@@ -18,7 +18,7 @@ from utils import rplt_time_to_datetime, quiz_time_to_datetime
 link_submissoes = "https://repl.it/data/teacher/classrooms/184710/submissions"
 
 # Cookie com o id da sessão iniciada no rep.it para passar nos requests
-cookie = {'connect.sid' : 's%3A2fdg2xLpIB7uZAqyqmcS_uEe534hcjxT.I6bR%2BOAdtl1ZRyKf5tJlAPTOyiQLeIhCcaMOqLe92LQ'}
+cookie = {'connect.sid' : 's%3AaaQEDIAb7_bv_8-CBILt9cfM4Dr_0Lza.Jq6WUmFnF6i%2F%2FM9m9cZsRCvpayP0MGX%2FjTo1kJihcSc'}
 
 # Enviar request, processar json recebido. (json vem como dict de listas por assignment, converter em lista)
 dict_submissoes = json.loads(rq.get(link_submissoes, cookies=cookie).content)
@@ -88,7 +88,7 @@ with app.app_context():
                 continue
 
             submissao = Submissao(
-                tarefa=Tarefa.query.filter_by(descricao='quiz1').first(),
+                tarefa=Tarefa.query.filter_by(descricao=f'quiz{i+1}').first(),
                 aluno=aluno,
                 timestamp=row['Timestamp']
             )
