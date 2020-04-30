@@ -55,6 +55,15 @@ def dashboard():
 
     return render_template('dashboard.html', alunos=alunos, semanas=semanas, dashboard=dashboard)
 
+@app.route('/csv_submissoes', methods=['GET'])
+def csv_submissoes():
+
+    df = pd.read_sql_table('submissao', 'sqlite:///data.db')
+
+    df.to_csv('submissoes.csv')
+
+    return send_file('submissoes.csv')
+
 
 @app.route('/replit', methods=['POST'])
 def replit():
