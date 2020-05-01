@@ -7,6 +7,8 @@ import pandas as pd
 from datetime import datetime
 import time
 
+import os
+
 # Iniciar app Flask
 app = Flask(__name__)
 # Configurar base de dados
@@ -62,7 +64,14 @@ def csv_submissoes():
 
     df.to_csv('submissoes.csv')
 
-    return send_file('submissoes.csv')
+    return send_file('submissoes.csv', as_attachment=True, attachment_filename='submissoes.csv')
+
+@app.route('/debug', methods=['GET'])
+def debug():
+
+    submissoes = Submissao.query.order_by(Submissao.timestamp).all()
+    print(submissoes[len(submissoes)-1])
+    return '200'
 
 
 @app.route('/replit', methods=['POST'])
