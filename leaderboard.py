@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, redirect
 from tabelas_db import db, Tarefa, Submissao, Aluno
 
 from utils import rplt_time_to_datetime, quiz_time_to_datetime
@@ -57,14 +57,24 @@ def dashboard():
 
     return render_template('dashboard.html', alunos=alunos, semanas=semanas, dashboard=dashboard)
 
-@app.route('/csv_submissoes', methods=['GET'])
-def csv_submissoes():
+@app.route('/csv/<tabela>')
+def get_csv(tabela):
 
-    df = pd.read_sql_table('submissao', 'sqlite:///data.db')
+    if tabela not in ['aluno', 'submissao', 'tarefa']:
+        return '<h1> Deve ser \'aluno\', \'submissao\', \'tarefa\' </h1>'
 
-    df.to_csv('submissoes.csv')
+    df = pd.read_sql_table(tabela, 'sqlite:///data.db')
+    
+    filename = tabela + '_' + datetime.now().strftime('%m%d%Y_%H%M%S') + '.csv'
 
-    return send_file('submissoes.csv', as_attachment=True, attachment_filename='submissoes.csv')
+    df.to_csv(filename)
+
+    return redirect('/download/' + filename)
+
+@app.route('/download/<filename>')
+def download(filename):
+
+    return send_file(filename)
 
 @app.route('/debug', methods=['GET'])
 def debug():

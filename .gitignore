@@ -1,2 +1,6 @@
 __pycache__/
 env
+submissao_*.csv
+tarefa_*.csv
+aluno_*.csv
+
