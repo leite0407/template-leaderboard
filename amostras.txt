@@ -10,8 +10,7 @@ REPLIT
     'classroom': {
         'id': 184710,
         'name': 'afterschool de Informática I',
-        'webhook_secret':
-        '6e975f31-169f-4ed3-a456-607bb3c81d1d'
+        'webhook_secret': '6e975f31-169f-4ed3-a456-607bb3c81d1d'
         },
     'submission': {
         'id': 11893825,
