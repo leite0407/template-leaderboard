@@ -81,7 +81,7 @@ def replit():
 
 	db.session.add(nova_submissao)
 
-	# Trocar por 'calcular_medalhas'
+	# TODO: Trocar por 'calcular_medalhas'
 	nivel_count = {'bronze' : 0, 'prata' : 0, 'ouro' : 0}
 	for semana in range(1,8):
 		for nivel in ['bronze', 'prata', 'ouro']:

@@ -15,4 +15,11 @@ Ler o guia abaixo!
 TODO
 
 ## Como está estruturado o código?
-* **leaderboard.py** - ficheiro
+* **leaderboard.py** - Ficheiro principal. App Flask.
+* **tabelas_db.py** - Base de dados.
+
+## Problemas
+* Como registar alunos e tarefas?
+	* Ficheiro json / csv e um script
+	* Form online
+* Guardar medalhas?
